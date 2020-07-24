@@ -1,0 +1,63 @@
+{% extends "accounts/base3.html"%}
+{% load static %}
+{% block content %}
+<style>
+
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+ 
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+ 
+}
+
+.right {
+  right: 0;
+  background-color: #141916;
+}
+
+
+</style>
+{% if request.user_agent.is_mobile %}
+
+    <div class="jumbotron">
+      {% for ia in frnds %}
+      <h2>{{ia}}</h2>
+      <p>Some text.</p>
+    </div>
+  {% endfor %}
+  {% endif %}
+ 
+  <div class="split left"> 
+    <button>
+ 
+    {% for ia in frnds %}
+  <div class="jumbotron "  style="height:1%;">
+  
+   <h6 class="lead"> {{ia.username}}</h6>
+   
+  </div>
+ 
+
+{% endfor %}
+</button>
+
+</div>
+   
+  <div class="split right">
+    <div class="text-center" style="background-color: #141916;">
+       
+        <img src="{% static 'img/msg.jpg'%}" class="rounded float-left"style="height: 15%;width:20%">
+        </div>
+    </div>
+
+
+{% endblock content %}

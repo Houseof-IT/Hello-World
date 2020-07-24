@@ -1,0 +1,49 @@
+.bg{
+        background-color:	#0e1111;
+
+}
+.navbar{
+    background-color: #232b2b !important;
+
+
+}
+.postp{
+    top:440px;
+left:350px;
+position:absolute;
+width:600px;
+height:210px;
+}
+
+.btn-light{
+
+    border-radius: 0%;
+    border-spacing: 0ch;
+
+}
+.fit-image{
+    max-width:5%;
+    max-height:5%;
+    }
+.jumbotron{
+    position: relative;
+   
+    
+    
+    border-top: 2px solid white;
+    border-bottom: 2px solid grey;
+    border-left: 2px solid #2F4F4F;
+    border-right: 2px solid  #778899
+
+}
+#upload {
+    opacity: 0;
+}
+
+
+#upload-label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+}

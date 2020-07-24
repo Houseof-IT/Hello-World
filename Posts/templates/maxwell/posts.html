@@ -1,0 +1,171 @@
+{% extends 'base2.html' %}
+{% load static %}<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+         <script src="{%static 'js/profile.js'%}"></script>
+        <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+      <!--script>
+      $(function(){
+        $(".dropdown-toggle").text($(".btn:first-child").text())
+
+        $(".dropdown-menu button").click(function(){
+          
+          $(".dropdown-menu:first-child").text($(this).text());
+          $(".btn:first-child").val($(this).text());
+    
+       });
+    
+    });
+    
+
+
+      </script-->
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#imageResult')
+                .attr('src', e.target.result);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$(function () {
+    $('#upload').on('change', function () {
+        readURL(input);
+    });
+});
+</script>
+<style>
+  
+#upload {
+  opacity: 0;
+}
+
+#upload-label {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+}
+
+</style>  
+</head>
+{% block content %}
+        <body class="bg">
+
+{% for d in data %}
+<div class="container row d-flex justify-content-center">
+<div class="card jumbotron" style="width:700px;background-color:#191919">
+  <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+    <img src="{{d.profilepic.url}}" alt="Card image" style="width:100%"></button>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update Profile Picture</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+                    <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                      <form method="POST" action="upprof" enctype="multipart/form-data"><input id="upload" type="file" onchange="readURL(this);" class="form-control border-0" name="prof">
+                        {% csrf_token %}
+                        <label id="upload-label" for="upload" class="font-weight-light text-muted">Choose file</label>
+                      <div class="input-group-append">
+                          <label for="upload" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                      <input type="submit" class="btn btn-primary">
+                        </div>
+                  </form>
+                      </div>
+                  <img src="{{d.profilepic.url}}">
+                        </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+    <div class="card-body">
+      <h4 class="card-title text-light" >{{d.first_name}} {{d.last_name}}</h4>
+      <p class="card-text text-light">{{d.Bio}}</p>
+           <div class="dropdown">
+<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
+        <div class="dropdown-menu">
+          
+          <button  type="button" class="btn  btn-secondary dropdown-item"  id="TL">Timeline</button>
+          <button  type="button" class="btn  btn-secondary dropdown-item"  >About</button>
+          <button  type="button" class="btn  btn-secondary dropdown-item" >Friends</button>
+          <button  type="button" class="btn  btn-secondary dropdown-item">Photos</button>
+          {% if d.user.is_authenticated == true %}
+          <button type="button" class="btn btn-secondary dropdown-item" data-toggle="modal" data-target="#myModal">Update</button>
+          {% endif %}
+        </div>
+   </div>
+  </div>
+ 
+ </div>
+  </div>
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="lead">Update Bio</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="updatebio">
+            {% csrf_token %}
+                      
+            <div class="form-group">
+              <textarea class="form-control" row=6 name="bio"> </textarea>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Update Bio">
+          </form>
+
+        </div>
+        <div class="modal-footer">
+                  </div>
+      </div>
+  </div>
+  </div>
+<div class="container-sm float-left Timeline">
+  {% if posts.caption %}
+  {% for p in posts %}
+  <div class="jumbotron container-sm " style="background-color:#353839;">  
+      <h5 style="color:white"    >    <img class="fit-image image-responsive" src="{{d.profilepic.url}}" /> &nbsp; {{d.first_name}} {{d.first_name}} ({{d.username}}) </h5>  <h6 style="color:white;margin-left:150px" >Posted On: {{p.Createdon}}</h6>         
+             <br>
+      
+     
+      <p class="lead" style="color:wheat">{{p.caption}}</p>
+ &nbsp;&nbsp;  <img src={{p.image.url}} style="width:90%;height:500">
+   </div>
+  
+
+<div class="jumbotron container-sm sidenav"><img src={{p.image.url}} style="width:90%;height:500"></div>
+
+{% endfor %}
+{% else %}
+<div class="jumbotron container-sm " style="background-color:#353839;"><p class="lead" style="color:wheat"> No Posts Added.</p></div>
+{% endif %}
+{% endfor %}
+{% endblock %}       
+</body>
+
+</html>

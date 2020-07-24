@@ -1,0 +1,97 @@
+{% extends "accounts/base1.html"%}
+{% load static %}
+<html>
+  <head>
+    <title>Intersect James.</title>  
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="{%static 'js/profile.js'%}"></script>
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+{% block content %}
+{% for d in data %}
+<div class="container row d-flex justify-content-center">
+<div class="card jumbotron" style="width:700px;background-color:#191919">
+    <img src="{{d.profilepic.url}}" alt="Card image" style="width:100%"></button>
+  
+                  
+    <div class="card-body">
+      <h4 class="card-title text-light" >{{d.first_name}} {{d.last_name}}</h4>
+      <p class="card-text text-light">{{d.Bio}}</p>
+           <div class="dropdown">
+<button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"></button>
+        <div class="dropdown-menu">
+          
+          <button  type="button" class="btn  btn-secondary dropdown-item"  id="TL">Timeline</button>
+          <button  type="button" class="btn  btn-secondary dropdown-item"  >About</button>
+          <button  type="button" class="btn  btn-secondary dropdown-item" >Friends</button>
+          <button  type="button" class="btn  btn-secondary dropdown-item">Photos</button>
+      
+        </div>
+        {% if frns == False %}
+        <a href="{% url 'follow' d.username %}"><button class="btn btn-primary">Follow</button></a>
+        {% endif %}    
+        {% if frnds == 0 %}
+          <button class="btn btn-warning">Requested</button>
+        {% elif frnds == 1 %}
+        <button class="btn btn-secondary">Following</button>
+        {% endif %}
+      </div>
+  </div>
+ 
+ </div>
+  </div>
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h4 class="lead">Update Bio</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+        </div>
+        <div class="modal-body">
+          <form method="POST" action="updatebio">
+            {% csrf_token %}
+                      
+            <div class="form-group">
+              <textarea class="form-control" row=6 name="bio"> </textarea>
+            </div>
+            <input type="submit" class="btn btn-primary" value="Update Bio">
+          </form>
+
+        </div>
+        <div class="modal-footer">
+                  </div>
+      </div>
+  </div>
+  </div>
+<div class="container-sm float-left Timeline">
+
+
+  {% for p in pos %}
+  <div class="jumbotron container-sm " style="background-color:#353839;">  
+      <h5 style="color:white"    >    <img class="fit-image image-responsive" src="{{d.profilepic.url}}" /> &nbsp; {{d.first_name}} {{d.first_name}} ({{d.username}}) </h5>  <h6 style="color:white;margin-left:150px" >Posted On: {{p.Createdon}}</h6>         
+             <br>
+      
+     
+      <p class="lead" style="color:wheat">{{p.caption}}</p>
+ &nbsp;&nbsp;  <img src={{p.image.url}} style="width:90%;height:500">
+   </div>
+  
+
+<!--div class="jumbotron container-sm sidenav"><img src={{p.image.url}} style="width:90%;height:500"></div-->
+
+{% endfor %}
+{% endfor %}
+{% endblock content %}
+</body>
+</html>

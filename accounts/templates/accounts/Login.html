@@ -1,0 +1,48 @@
+{% load static %}
+<html>
+<head>
+  <title>Intersect Login.</title>  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+     <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+    <body class="bg">
+      <div class="container">
+      
+              <div class="text-center">
+    <img src="{% static 'img/Capture.jpg'%}" class="img-fluid" style="width:400px;height:auto;">
+    </div>
+    </div>
+   <br>
+    <div class="container justified-center ">
+   
+    <div class="jumbotron box1" style="background:black;color: white;">
+		
+    <form id="form1"  action="logins" method="POST">
+      
+      
+      <div class="form-group">
+			<div class="logo"></div>
+			<h1 id="helo" class="text-center">Login</h1>
+      <p>Username</p>
+      {% csrf_token %}
+      <input type="text" name="Username" class="form-control" value="" placeholder="Username or Email" id="uname" autofocus></div>
+			<div class="form-group">
+      <p>Password</p>
+
+			<input type="password" name="Password" class="form-control" value="" placeholder="Password" id="pass"></div>
+			<input type="submit"  class="btn btn-primary" name="" value="Login" id="Sub1	">
+			<a href="{% url 'accounts:forgot' %}">Forget Password?</a><br>
+      Don't have an account? <a href="{%url 'accounts:register'%}" class="btn btn-primary"> Register</a> 
+    </form>
+		</div>
+</div>
+
+    </body>
+
+</html>

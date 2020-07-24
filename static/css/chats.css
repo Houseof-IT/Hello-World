@@ -1,0 +1,68 @@
+.split {
+    height: 100%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  
+  .left {
+    left: 0;
+    background-color: #111;
+  }
+  
+  .right {
+    right: 0;
+    background-color: red;
+  }
+  .bg{
+    background-color:	#0e1111;
+
+}
+.navbar{
+    background-color: #232b2b !important;
+
+
+}
+#upload {
+    opacity: 0;
+}
+.fit-image{
+    max-width:5%;
+    max-height:5%;
+    }
+
+#upload-label {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+}
+.jumbotron{
+    position: relative;
+   
+    height: 10%;
+    
+    border-top: 2px solid white;
+    border-bottom: 2px solid grey;
+    border-left: 2px solid #2F4F4F;
+    border-right: 2px solid  #778899
+
+}
+.jumbotron1{
+  position: relative;
+  
+
+}
+
+.sidenav {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+  }

@@ -1,0 +1,64 @@
+.box2{
+    width:90%;
+	box-sizing: border-box;
+	border-radius: 20px;
+	padding:60px 30px;
+	display:block;
+	box-shadow: 5px 5px 12px white;
+    justify-content: center;
+    align-items: center;
+ 
+}
+  
+  .container {
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  
+}
+
+
+
+input[type=date]::-webkit-inner-spin-button, 
+input[type=date]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+  .bg{
+	background-color:black;
+   
+    }
+    
+.content {
+        position: relative;
+      }
+#right-panel-link {
+       position: absolute;
+        top: 0;
+        right: 0;
+      }
+.tab{
+  display:none;
+}
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+/* Mark the active step: */
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #4CAF50;
+}

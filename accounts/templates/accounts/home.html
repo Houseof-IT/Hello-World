@@ -1,0 +1,106 @@
+
+{% load static %}
+<html>
+    <head>
+         <title>Intersect Login.</title>  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/home.css'%}">         
+    <script>
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+    
+            reader.onload = function (e) {
+                $('#imageResult')
+                    .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    
+    $(function () {
+        $('#upload').on('change', function () {
+            readURL(input);
+        });
+    });
+    </script>
+    <style>
+ 
+    
+    </style>  
+    
+  </head>
+ <body class="bg">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark " >
+        <a class="navbar-brand" href="#"><img src="{% static 'img/Capture.jpg'%}" width=300px height=60></a> &nbsp
+         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+   <span class="navbar-toggler-icon"></span>
+ </button>
+ <div class="collapse navbar-collapse" id="navb">
+           <form class="form-inline my-2 my-lg-0" action="friendsf">
+   <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search">
+   <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+ </form>
+           <ul class="navbar-nav mr-auto">
+   <li class="nav-item">
+     <a class="nav-link " href="{% url 'accounts:profile' %}">Profile</a>
+   </li>
+  
+   <li class="nav-item">
+    <a class="nav-link" href="{% url  'chats:chat_list' %}">Chat</a>
+  </li>
+
+   <li class="nav-item">
+     <a class="nav-link" href="{% url  'accounts:logout' %}" >Logout</a>
+   </li>
+ </ul>
+           </nav>
+</button>
+</div>
+  <br>
+            {% for d in datas %}
+          <div class="jumbotron container-sm " style="background-color: 		#353839;width:100%;height:450px">          <form method = "post" action="post" enctype="multipart/form-data"  > 
+       
+    {% csrf_token %} 
+    <h5 style="color:white"    >    <img class="fit-image image-responsive" src="{{d.profilepic.url}}" /> &nbsp; {{d.first_name}} {{d.first_name}} ({{d.username}})</h5>         
+    <p class="lead" style="color:white">Hello, Wanna say something to the world?</p>
+             <div class="form-group">
+            <textarea name=text class="form-control" row=9 style="color:wheat;background-color: #232b2b;"></textarea> 
+           <br> 
+           <div class="input-group mb-3 py-2 rounded-pill bg-dark shadow-sm">
+            
+            <label for="upload" class="btn btn-dark m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+           
+            <input  id="upload" type="file" onchange="readURL(this);"  name="image" class="form-control border-0">
+                      
+            <div class="input-group-append"> </div>
+        </div>
+  
+            <button type="submit" class="btn btn-primary">Upload</button>
+            </form>   
+        </div>
+        
+    </div>
+    {% for p in posts %}
+    <div class="jumbotron container-sm " style="background-color:#353839;">  
+        <h5 style="color:white"    >    <img class="fit-image image-responsive" src="{{d.profilepic.url}}" /> &nbsp; {{d.first_name}} {{d.first_name}} ({{d.username}}) </h5>  <h6 style="color:white;margin-left:150px" >Posted On: {{p.Createdon}}</h6>         
+               <br>
+        
+       
+        <p class="lead" style="color:wheat">{{p.caption}}</p>
+   &nbsp;&nbsp;  <img src={{p.image.url}} style="max-width:100%;
+   max-height:100%;">
+     </div>
+    
+
+ <div class="jumbotron container-sm sidenav"><img src={{p.image.url}} style="width:90%;height:500"></div>
+ {% endfor %}
+ {% endfor %}
+ </body>
+</html>
